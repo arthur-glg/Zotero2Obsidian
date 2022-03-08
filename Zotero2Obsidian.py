@@ -1,7 +1,7 @@
 from pyzotero import zotero
 import os.path
 
-zot = zotero.Zotero(9074338, 'user', 'kuqXOku4HypQVksQklrqErPn')#identification avec le compte Zotero
+zot = zotero.Zotero(xxxxxx, 'user', 'xxxxx')#identification avec le compte Zotero
 items = zot.items(limit=1000)#on réupère les 1000 premiers (suffisant j'espère) de la librairie 
 path=os.path.dirname('D:\\stage_leesu\\rep_leesu_stage\\biblio\\note_biblio\\')
 type_list=['journalArticle','report','webpage','presentation','thesis']
