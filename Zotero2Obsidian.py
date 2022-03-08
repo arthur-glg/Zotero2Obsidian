@@ -3,19 +3,23 @@ import os.path
 
 zot = zotero.Zotero(9074338, 'user', 'kuqXOku4HypQVksQklrqErPn')#identification avec le compte Zotero
 items = zot.items(limit=1000)#on réupère les 1000 premiers (suffisant j'espère) de la librairie 
-path=os.path.dirname('C:\\Users\\guill\\Desktop\\biblio\\')
-type_list=['journalArticle','report','webpage','presentation']
+path=os.path.dirname('D:\\stage_leesu\\rep_leesu_stage\\biblio\\note_biblio\\')
+type_list=['journalArticle','report','webpage','presentation','thesis']
 for item in items:
     if item['data']['itemType'] in  type_list:
         short_date = item['meta']['parsedDate']
         short_date = short_date[:4]
-        name = "("+item['meta']['creatorSummary']+","+short_date+")"+".md"
+        sanspoint = item['meta']['creatorSummary']
+        sanspoint = sanspoint.replace('.','')
+        name = "("+sanspoint+","+short_date+")"+".md"
         path_test = os.path.join(path, name)
         if os.path.exists(path_test) == False:
             file = open(path_test, "x",encoding='utf-8')
+            tag="#"+item['data']['itemType']
             h1 = "# "+ item['data']['title']
             file_id= item['data']['key']
             file.write(file_id+"\n")
+            file.write(tag+"\n")
             file.write(h1)
             file.close()
         else:
@@ -26,8 +30,10 @@ for item in items:
                 name = "("+item['meta']['creatorSummary']+","+short_date+"b"+")"+".md"
                 path_test = os.path.join(path, name)
                 file = open(path_test, "x",encoding='utf-8')
+                tag="#"+item['data']['itemType']
                 h1 = "# "+ item['data']['title']
                 file.write(file_id+"\n")
+                file.write(tag+"\n")
                 file.write(h1)
                 file.close()
             else:
